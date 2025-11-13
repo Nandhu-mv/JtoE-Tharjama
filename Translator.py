@@ -49,10 +49,10 @@ output_file = "translated_english.txt"
 # Resume from existing output file (if any)
 if os.path.exists(output_file):
     with open(output_file, "r", encoding="utf-8") as f:
-        translated_count = sum(1 for _ in f)
-    log(f"Resuming — {translated_count} lines already translated.")
+        prevf = f
+    log(f"About to translate")
 else:
-    translated_count = 0
+    prevf = ""
     log("Starting fresh translation session.")
 
 # ------------------------------------------------------------
@@ -70,9 +70,9 @@ try:
         with open(input_file, "r", encoding="utf-8") as f:
             lines = f.readlines()
 
-        new_lines = [line for line in lines[translated_count:] if line.strip() or line == "\n"]
+        new_lines = [line for line in lines[0:] if line.strip() or line == "\n"]
 
-        if new_lines:
+        if new_lines and (prevf != new_lines):
             log(f"🔎 Found {len(new_lines)} new line(s). Translating...\n")
 
             # Clean non-empty lines for batch processing
@@ -90,13 +90,13 @@ try:
                     translated_lines.append("\n")
 
             # Write output
-            with open(output_file, "a", encoding="utf-8") as f:
+            with open(output_file, "w", encoding="utf-8") as f:
                 f.writelines(translated_lines)
 
-            translated_count += len(new_lines)
+            prevf = f
             log(f"✅ Added {len(new_lines)} translation(s) → {output_file}\n")
 
-        time.sleep(5)
+        time.sleep(2)
 
 except KeyboardInterrupt:
     log("🛑 Stopped by user. Exiting safely...")

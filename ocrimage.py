@@ -10,7 +10,7 @@ import numpy as np
 pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 lang = "jpn"  # Japanese OCR
-output_file = "captured_text.txt"
+output_file = "japanese_text.txt"
 
 
 def select_region():
@@ -58,14 +58,14 @@ def main():
             text = pytesseract.image_to_string(img, lang=lang)
             timestamp = datetime.datetime.now().strftime("[%Y-%m-%d %H:%M:%S]")
 
-            with open(output_file, "a", encoding="utf-8") as f:
+            with open(output_file, "w", encoding="utf-8") as f:
                 f.write(f"{timestamp}\n{text}\n{'-'*50}\n")
 
             print(f"🖼️ Captured and OCR'd at {timestamp}")
-            time.sleep(5)
+            time.sleep(10)
 
     except KeyboardInterrupt:
-        print("\n🛑 Stopped. All text saved in:", output_file)
+        print("\n🛑 Stopped. Text saved in:", output_file)
 
 
 if __name__ == "__main__":
