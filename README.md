@@ -1,20 +1,46 @@
-# JtoE-Tharjama
-Intended as Translator for jp rpg games or any but can be used for any translation need.
+# 🈺 JtoE-Tharjama
 
-Uses facebook/m2m100_1.2B pretrained for model which provides relatively relaible translations for free
+**JtoE-Tharjama** is a Japanese → English translator designed primarily for Japanese RPG (JRPG) games, but it can be used for any general translation purpose.
 
-Model will require 10 Gb for free storage.
+---
 
-Translation will be faster if System has Cuda previlages
-        nvcc --version
+## 🧠 Model
+
+This project uses the **facebook/m2m100_1.2B** pretrained model, which provides relatively reliable translations for free.
+
+> ⚠️ Requires at least **10 GB of free storage** for the model.
+
+Performance improves if your system supports **CUDA** (GPU acceleration).
+
+Check CUDA availability:
+```bash
+nvcc --version
+```
+
+Use the provided requirements.txt file to install the Dependencies :
+``` bash
+pip install -r requirements.txt
+```
+
+🪟 Step 1 — Run the OCR script
+
+Select the screen region for automatic text capture:
+```bash
+python ocrimage.py
+```
+
+💬 Step 2 — Run the Translator
+
+Run this in a separate terminal:
+``` bash
+python Translator.py
+```
 
 
-Step 1 - Run ocrimage.py and select the coordinate 
-    python ocrimage.py
+📂 Output
+Translated text will be written to:
 
-Step 2 - Run Translator.py in another terminal
-    python Translator.py
+Translated_english.txt
 
-The translated text will be shown in Translated_english.txt file
 
-feel free to merge the scripts for ease of use.
+
